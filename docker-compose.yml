@@ -7,10 +7,8 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - PROJECT_NAME=Scheduler API
-      - MONGODB_URI=${MONGODB_URI}
-      - JWT_SECRET=${JWT_SECRET}
-      - FRONTEND_URL=http://localhost:5173
+      - PORT=8000
+      - CLIENT_URL=http://localhost:5173
     env_file:
       - ./backend/.env
     restart: unless-stopped

@@ -1,20 +1,20 @@
-# Use official Python runtime as a parent image
-FROM python:3.11-slim
+# Use official Node.js runtime as a parent image
+FROM node:20-alpine
 
 # Set the working directory in the container
 WORKDIR /app
 
-# Copy the requirements file into the container
-COPY requirements.txt .
+# Copy package.json and package-lock.json (if available)
+COPY package*.json ./
 
-# Install any needed packages specified in requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
+# Install dependencies
+RUN npm install
 
-# Copy the current directory contents into the container at /app
+# Copy the rest of the application
 COPY . .
 
 # Expose port 8000
 EXPOSE 8000
 
-# Run uvicorn server
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Run the node server
+CMD ["npm", "start"]
