@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
-const authMiddleware = require('../middleware/authMiddleware');
+const { protect } = require('../middleware/authMiddleware');
 
-router.use(authMiddleware);
+router.use(protect);
 
 router.get('/search', async (req, res) => {
   try {
