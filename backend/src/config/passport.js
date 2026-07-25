@@ -12,7 +12,8 @@ const configurePassport = () => {
       {
         clientID,
         clientSecret,
-        callbackURL,
+        callbackURL: '/api/auth/google/callback',
+        proxy: true,
         scope: ['profile', 'email'],
       },
       async (accessToken, refreshToken, profile, done) => {
