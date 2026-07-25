@@ -32,17 +32,17 @@ app.use(
 app.use(passport.initialize());
 
 // API Routes
-app.use('/api/auth', authRoutes);
-app.use('/api/appointments', appointmentRoutes);
-
-if (typeof mapRoutes === 'function') {
-  app.use('/api/maps', mapRoutes);
-} else {
-  console.error('[CRITICAL ERROR] mapRoutes is not a function! It is:', typeof mapRoutes, mapRoutes);
+try {
+  app.use('/api/auth', authRoutes);
+  app.use('/api/appointments', appointmentRoutes);
+  if (typeof mapRoutes === 'function') {
+    app.use('/api/maps', mapRoutes);
+  }
+  app.use('/api/contacts', contactRoutes);
+  app.use('/api/notifications', notificationRoutes);
+} catch (e) {
+  console.error("FATAL ROUTE REGISTRATION ERROR:", e);
 }
-
-app.use('/api/contacts', contactRoutes);
-app.use('/api/notifications', notificationRoutes);
 
 // Global Error Handling
 app.use((err, req, res, next) => {

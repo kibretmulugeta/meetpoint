@@ -1,6 +1,10 @@
 const app = require('./app');
 const { startReminders } = require('./reminders/cron');
 
+app.get('/', (req, res) => {
+  res.status(200).send('Scheduler API is running!');
+});
+
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
   console.log(`==========================================`);
