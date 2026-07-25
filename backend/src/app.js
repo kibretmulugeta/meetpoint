@@ -32,12 +32,10 @@ app.use(
 app.use(passport.initialize());
 
 // API Routes
-console.log('authRoutes:', typeof authRoutes);
-console.log('appointmentRoutes:', typeof appointmentRoutes);
-console.log('mapRoutes:', typeof mapRoutes, mapRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/appointments', appointmentRoutes);
-app.use('/api/maps', mapRoutes);
+// Temporarily bypass maps to test if it's the root cause of the crash
+// app.use('/api/maps', mapRoutes);
 app.use('/api/contacts', contactRoutes);
 app.use('/api/notifications', notificationRoutes);
 
