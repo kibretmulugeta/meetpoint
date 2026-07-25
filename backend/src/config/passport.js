@@ -5,7 +5,7 @@ const User = require('../models/User');
 const configurePassport = () => {
   const clientID = process.env.GOOGLE_CLIENT_ID || 'dummy_id';
   const clientSecret = process.env.GOOGLE_CLIENT_SECRET || 'dummy_secret';
-  const callbackURL = `${process.env.CLIENT_URL || 'http://localhost:3000'}/auth/google/callback`;
+  const callbackURL = `${process.env.API_URL || 'http://localhost:8000'}/api/auth/google/callback`;
 
   passport.use(
     new GoogleStrategy(
@@ -20,7 +20,7 @@ const configurePassport = () => {
           const googleId = profile.id;
           const email = profile.emails && profile.emails[0] ? profile.emails[0].value : '';
           const displayName = profile.displayName || 'Google User';
-          const avatarUrl = profile.photos && profile.photos[0] ? profile.photos[0].value : '';
+          const profilePicture = profile.photos && profile.photos[0] ? profile.photos[0].value : '';
 
           // Check if user already exists in database
           let user = await User.findOne({ googleId });
@@ -34,7 +34,8 @@ const configurePassport = () => {
             googleId,
             email,
             displayName,
-            avatarUrl,
+            profilePicture,
+            authProvider: 'google'
           });
 
           return done(null, user);
