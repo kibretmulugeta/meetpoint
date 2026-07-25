@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const authMiddleware = require('../middleware/authMiddleware');
+const { protect } = require('../middleware/authMiddleware');
 
-router.use(authMiddleware);
+router.use(protect);
 
 router.get('/search', async (req, res) => {
   const { query } = req.query;

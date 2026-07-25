@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const Appointment = require('../models/Appointment');
-const authMiddleware = require('../middleware/authMiddleware');
+const { protect } = require('../middleware/authMiddleware');
 
 // Ensure user is authenticated for all routes
-router.use(authMiddleware);
+router.use(protect);
 
 // Create Appointment
 router.post('/', async (req, res) => {
