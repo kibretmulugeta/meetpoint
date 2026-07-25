@@ -32,6 +32,9 @@ app.use(
 app.use(passport.initialize());
 
 // API Routes
+console.log('authRoutes:', typeof authRoutes);
+console.log('appointmentRoutes:', typeof appointmentRoutes);
+console.log('mapRoutes:', typeof mapRoutes, mapRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/appointments', appointmentRoutes);
 app.use('/api/maps', mapRoutes);
