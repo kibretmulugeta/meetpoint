@@ -34,8 +34,13 @@ app.use(passport.initialize());
 // API Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/appointments', appointmentRoutes);
-// Temporarily bypass maps to test if it's the root cause of the crash
-// app.use('/api/maps', mapRoutes);
+
+if (typeof mapRoutes === 'function') {
+  app.use('/api/maps', mapRoutes);
+} else {
+  console.error('[CRITICAL ERROR] mapRoutes is not a function! It is:', typeof mapRoutes, mapRoutes);
+}
+
 app.use('/api/contacts', contactRoutes);
 app.use('/api/notifications', notificationRoutes);
 
